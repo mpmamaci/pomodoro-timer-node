@@ -1,0 +1,35 @@
+{
+  "name": "pomodoro-timer-node",
+  "version": "1.0.0",
+  "description": "Node.js Server for Pomodoro Timer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mpmamaci/pomodoro-timer-node.git"
+  },
+  "keywords": [
+    "nodejs",
+    "server",
+    "pomodoro"
+  ],
+  "author": "Marvin Maciejewski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mpmamaci/pomodoro-timer-node/issues"
+  },
+  "homepage": "",
+  "dependencies": {
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "joi": "^14.3.1",
+    "mongoose": "^5.4.19",
+    "underscore": "^1.9.1"
+  },
+  "devDependencies": {
+    "jshint": "^2.10.2"
+  }
+}
