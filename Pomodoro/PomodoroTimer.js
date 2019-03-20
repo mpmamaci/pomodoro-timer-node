@@ -13,7 +13,6 @@ function tick(obj, timer) {
     obj._state.pauseTimer.runs = false;
     obj._state.focusTimer.runs = false;
   }
-  console.log(obj._state);
 }
 
 class PomodoroTimer {
@@ -59,8 +58,10 @@ class PomodoroTimer {
     if (this.hasRunningTimer()) {
       clearInterval(this.intervallId);
       this.toogleRunning();
+      return true;
     } else {
       console.log('Nothing to Stop');
+      return false;
     }
   }
 
@@ -83,8 +84,10 @@ class PomodoroTimer {
       this.intervallId = setInterval(() => {
         tick(this, 'f');
       }, 1000);
+      return true;
     } else {
       console.log('One Timer is running');
+      return false;
     }
   }
 
@@ -95,8 +98,10 @@ class PomodoroTimer {
       this.intervallId = setInterval(() => {
         tick(this, 'p');
       }, 1000);
+      return true;
     } else {
       console.log('One Timer is running');
+      return false;
     }
   }
 }

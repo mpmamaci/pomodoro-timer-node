@@ -2,10 +2,8 @@ const Joi = require('joi');
 const express = require('express');
 const app = express();
 const PomodoroTimer = require('./Pomodoro/PomodoroTimer');
-const Timer = new PomodoroTimer(25, 5);
+const Timer = new PomodoroTimer(0, 0);
 
-const DEFAULT_TIME = 25;
-const DEFAULT_PAUSE_TIME = 5;
 app.use(express.json());
 
 // Reads the .env-file
@@ -18,30 +16,31 @@ app.get('/api/timer/status', (req, res) => {
 });
 
 app.get('/api/timer/stop', (req, res) => {
-  res.send(Timer.stop());
+  Timer.stop();
+  res.send(Timer.status());
 });
 
-app.get('/api/timer/start/focus', (req, res) => {
+app.post('/api/timer/focus/start', (req, res) => {
   const { error } = validateTimer(req.body);
 
   if (error) return res.status(400).send(error.details[0].message);
   let time = req.body.time;
 
-  time ? (time = time) : (time = DEFAULT_TIME);
-
-  Timer.startFocustime(time);
+  if (!Timer.startFocustime(time)) {
+    return res.status(409).send('Timer is running');
+  }
   res.status(200).send(Timer.status());
 });
 
-app.get('/api/timer/start/pause', (req, res) => {
+app.post('/api/timer/pause/start', (req, res) => {
   const { error } = validateTimer(req.body);
 
   if (error) return res.status(400).send(error.details[0].message);
   let time = req.body.time;
 
-  time ? (time = time) : (time = DEFAULT_PAUSE_TIME);
-
-  Timer.startPausetime(time);
+  if (!Timer.startPausetime(time)) {
+    return res.status(409).send('Timer is running');
+  }
   res.status(200).send(Timer.status());
 });
 
@@ -51,6 +50,7 @@ function validateTimer(course) {
   schema = {
     time: Joi.number()
       .min(1)
+      .max(1440)
       .required()
   };
 
