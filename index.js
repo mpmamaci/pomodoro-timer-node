@@ -1,10 +1,12 @@
 const Joi = require('joi');
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const PomodoroTimer = require('./Pomodoro/PomodoroTimer');
 const Timer = new PomodoroTimer(0, 0);
 
 app.use(express.json());
+app.use(cors());
 
 // Reads the .env-file
 const dotenv = require('dotenv');
