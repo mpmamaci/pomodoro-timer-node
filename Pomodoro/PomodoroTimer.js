@@ -25,10 +25,12 @@ class PomodoroTimer {
     this._state = {
       focusTimer: {
         focusTime: focusTime * MULTIPLIER,
+        startTime: focusTime * MULTIPLIER,
         runs: false
       },
       pauseTimer: {
         pauseTime: pauseTime * MULTIPLIER,
+        startTime: pauseTime * MULTIPLIER,
         runs: false
       }
     };
@@ -72,8 +74,10 @@ class PomodoroTimer {
   changeTimer(time, timer) {
     if (timer === 'f') {
       this._state.focusTimer.focusTime = time * MULTIPLIER;
+      this._state.focusTimer.startTime = time * MULTIPLIER;
     } else if (timer === 'p') {
       this._state.pauseTimer.pauseTime = time * MULTIPLIER;
+      this._state.pauseTimer.startTime = time * MULTIPLIER;
     }
   }
 
