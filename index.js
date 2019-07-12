@@ -64,15 +64,15 @@ app.get('/api/timer/:id', (req, res) => {
 
 app.listen(port, () => console.log(`listen on port ${process.env.PORT}..`));
 
-function validateTimer(course) {
+function validateTimer(timer) {
   schema = {
     time: Joi.number()
-      .min(1)
+      .min(0)
       .max(1440)
       .required()
   };
 
-  return Joi.validate(course, schema);
+  return Joi.validate(timer, schema);
 }
 
 function validateId(id) {

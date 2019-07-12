@@ -23,6 +23,7 @@ class PomodoroTimer {
    */
   constructor(focusTime, pauseTime) {
     this._state = {
+      purpose: '',
       focusTimer: {
         focusTime: focusTime * MULTIPLIER,
         startTime: focusTime * MULTIPLIER,
